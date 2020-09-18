@@ -22,7 +22,7 @@ export function dataFromSnapshot(snapshot) {
 }
 
 export function listenToEventsFromFirestore() {
-  return db.collection("events").orderBy('date')
+  return db.collection("events").orderBy("date")
 }
 
 export function listenToEventFromFirestore(eventId) {
@@ -43,15 +43,24 @@ export function addEventToFirestore(event) {
 }
 
 export function updateEventInFirestore(event) {
-  return db.collection('events').doc(event.id).update(event)
+  return db.collection("events").doc(event.id).update(event)
 }
 
 export function deleteEventInFirestore(eventId) {
-  return db.collection('events').doc(eventId).delete()
+  return db.collection("events").doc(eventId).delete()
 }
 
 export function cancelEventToggle(event) {
-  return db.collection('events').doc(event.id).update({
-    isCancelled: !event.isCancelled
+  return db.collection("events").doc(event.id).update({
+    isCancelled: !event.isCancelled,
+  })
+}
+
+export function setUserProfileData(user) {
+  return db.collection("users").doc(user.uid).set({
+    displayName: user.displayName,
+    email: user.email,
+    photoURL: user.photoURL || null,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   })
 }
