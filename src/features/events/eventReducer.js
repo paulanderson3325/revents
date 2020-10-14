@@ -1,8 +1,16 @@
 //import { sampleData } from "../../app/api/sampleData"
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT, FETCH_EVENTS } from "./eventConstants"
+import {
+  CREATE_EVENT,
+  UPDATE_EVENT,
+  DELETE_EVENT,
+  FETCH_EVENTS,
+  LISTEN_TO_EVENT_CHAT,
+  CLEAR_CHAT_COMMENTS,
+} from "./eventConstants"
 
 const initialState = {
   events: [],
+  comments: [],
 }
 
 export default function eventReducer(state = initialState, { type, payload }) {
@@ -15,18 +23,31 @@ export default function eventReducer(state = initialState, { type, payload }) {
     case UPDATE_EVENT:
       return {
         ...state,
-        events: [...state.events.filter(evt => evt.id !== payload.id), payload],
+        events: [
+          ...state.events.filter((evt) => evt.id !== payload.id),
+          payload,
+        ],
       }
     case DELETE_EVENT:
       return {
         ...state,
-        events: [...state.events.filter(evt => evt.id !== payload)],
+        events: [...state.events.filter((evt) => evt.id !== payload)],
       }
-      case FETCH_EVENTS:
-        return {
-          ...state,
-          events: payload
-        }
+    case FETCH_EVENTS:
+      return {
+        ...state,
+        events: payload,
+      }
+    case LISTEN_TO_EVENT_CHAT:
+      return {
+        ...state,
+        comments: payload,
+      }
+    case CLEAR_CHAT_COMMENTS:
+      return {
+        ...state,
+        comments: [],
+      }
     default:
       return state
   }
