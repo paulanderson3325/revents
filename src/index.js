@@ -7,18 +7,18 @@ import "./app/layout/styles.css"
 import ScrollToTop from "./app/layout/ScrollToTop"
 import App from "./app/layout/App"
 import * as serviceWorker from "./serviceWorker"
-import { BrowserRouter } from "react-router-dom"
 import { Provider } from "react-redux"
-import { configureStore } from "./app/store/configureStore"
+import { configureStore, history } from "./app/store/configureStore"
+import { ConnectedRouter } from "connected-react-router"
 
 const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <ScrollToTop />
       <App />
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 )

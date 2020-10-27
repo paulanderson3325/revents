@@ -71,7 +71,7 @@ export default function profileReducer(
       return {
         ...state,
         followers: [],
-        followings: [,]        
+        followings: [],        
       }  
     case LISTEN_TO_FEED:
       return {
